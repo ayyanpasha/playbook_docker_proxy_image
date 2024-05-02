@@ -13,10 +13,7 @@ ApiProxy.on('error', function(err, req, res) {
 // Proxy server routing to the target Server 2
 app.all('/*', function(req, res) {
     console.log("Hey Ninja! Redirecting to Server2");
-    const container = req.header('Container');
-    const port = req.header('Port');
-    const path = req.header('Path');
-    const url = `${container}:${port}/${path}`;
+    const url = req.url;
     ApiProxy.web(req, res, { target: url });
 });
 
