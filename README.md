@@ -1,0 +1,1 @@
+# playbook_docker_proxy_image
