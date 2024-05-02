@@ -4,8 +4,6 @@ var httpProxy = require('http-proxy');
 
 var ApiProxy = httpProxy.createProxyServer();
 
-var serverOne = 'http://project2:3005';
-
 // Handle errors from the proxy
 ApiProxy.on('error', function(err, req, res) {
     console.error("Error occurred while proxying:", err);
@@ -15,7 +13,11 @@ ApiProxy.on('error', function(err, req, res) {
 // Proxy server routing to the target Server 2
 app.all('/*', function(req, res) {
     console.log("Hey Ninja! Redirecting to Server2");
-    ApiProxy.web(req, res, { target: serverOne });
+    const container = req.header('Container');
+    const port = req.header('Port');
+    const path = req.header('Path');
+    const url = `${container}:${port}/${path}`;
+    ApiProxy.web(req, res, { target: url });
 });
 
 app.listen(80, function() {
