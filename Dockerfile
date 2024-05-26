@@ -13,9 +13,6 @@ RUN npm install
 # Copy the application code to the working directory
 COPY . .
 
-#Convert Typescript to JavaScript
-RUN tsc
-
 # Expose ports
 EXPOSE 80
 EXPOSE 3001
