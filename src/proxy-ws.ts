@@ -1,14 +1,14 @@
-const WebSocket = require('ws');
-const http = require('http');
+import WebSocket from 'ws';
+import http from 'http';
 
 const server = http.createServer();
 
 // Create a WebSocket server
 const wss = new WebSocket.Server({ noServer: true });
 
-server.on('upgrade', (request, socket, head) => {
+server.on('upgrade', (request: http.IncomingMessage, socket: any, head: Buffer) => {
     // Extract the target WebSocket URL from the request
-    const targetUrl = request.url.slice(1); // Extract the target URL from the request path
+    const targetUrl = request.url!.slice(1); // Extract the target URL from the request path
     // Forward the WebSocket connection to the target WebSocket server
     wss.handleUpgrade(request, socket, head, (ws) => {
         const targetWs = new WebSocket(`ws://${targetUrl}`);
@@ -26,7 +26,7 @@ server.on('upgrade', (request, socket, head) => {
             ws.close();
         });
         targetWs.on('error', (error) => {
-            console.error(error)
+            console.error(error);
             ws.close();
         });
     });
