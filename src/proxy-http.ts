@@ -1,13 +1,8 @@
-import express, { Request, Response } from "express";
+import express, { Request, Response, NextFunction } from "express";
 import httpProxy from 'http-proxy';
 
 const app = express();
 const ApiProxy = httpProxy.createProxyServer();
-
-// Handle errors from the proxy
-ApiProxy.on('error', (err: Error) => {
-    console.error("Error occurred while proxying:", err);
-});
 
 // Proxy server routing to the target Server 2
 app.all('/*', (req: Request, res: Response) => {
@@ -17,7 +12,11 @@ app.all('/*', (req: Request, res: Response) => {
     const path = req.query.path;
 
     const url = `http://${containerId}:${port}/${path}`;
-    ApiProxy.web(req, res, { target: url });
+    
+    ApiProxy.web(req, res, { target: url }, (err) => {
+        console.error("Error occurred while proxying:", err);
+        res.status(500).send('An error occurred while processing your request.');
+    });
 });
 
 app.listen(80, () => {
