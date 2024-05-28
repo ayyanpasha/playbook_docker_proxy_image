@@ -3,6 +3,7 @@
 This is made to support the playground communication with:
 FrontEnd: https://github.com/ayyanpasha/codedamn-frontend.git
 Express API: https://github.com/ayyanpasha/playbook_express_api.git
+Dockerized Image to communicate with: https://github.com/ayyanpasha/playbook_docker_container_image.git
 
 This repository contains two proxy servers: a WebSocket proxy server and an HTTP proxy server. The WebSocket proxy server forwards WebSocket connections to target WebSocket servers, while the HTTP proxy server routes HTTP requests to target servers based on query parameters.
 
@@ -43,11 +44,11 @@ Make sure you have the following installed on your machine:
     ```bash
     docker build -t proxy-server .
 
-6. **Create Docker Network:**
+5. **Create Docker Network:**
     ```bash
     docker network create codedamn
 
-7. **Run Docker Image:**
+6. **Run Docker Image:**
     ```bash
     docker run --network codedamn -p 80:80 -p 3001:3001 -d proxy-server
 
