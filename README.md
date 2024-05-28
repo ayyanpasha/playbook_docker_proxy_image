@@ -9,10 +9,8 @@ This repository contains two proxy servers: a WebSocket proxy server and an HTTP
 ## Table of Contents
 
 - [Getting Started](#getting-started)
-- [Running the Proxy Server](#running-the-proxy-server)
-- [Docker](#docker)
-- [Endpoints](#endpoints)
-- [License](#license)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
 
 ## Getting Started
 
