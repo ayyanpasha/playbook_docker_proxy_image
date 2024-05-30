@@ -19,6 +19,6 @@ app.all('/*', (req: Request, res: Response) => {
     });
 });
 
-app.listen(80, () => {
+app.listen(3002, () => {
     console.log("Server running at port 80");
 });
